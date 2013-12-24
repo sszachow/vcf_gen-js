@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8"/>
+    	<title>vCard gen</title>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>	
+		<script type="text/javascript" src="js/Blob.min.js"></script>
+		<script type="text/javascript" src="js/FileSaver.min.js"></script>
+	</head>
+	<body>
+		<h3>vCard gen</h3>
+		<input id="first" class="" name="first" type="text" value="First" onblur="if (this.value == '') {this.value = 'First';}" />
+		<input id="middle" class="" name="middle" type="text" value="Middle" onblur="if (this.value == '') {this.value = 'Middle';}" />
+		<input id="last" class="" name="last" type="text" value="Last" onblur="if (this.value == '') {this.value = 'Last';}" />
+		<br>
+		Contacts: <input id="contacts" class="" name="contacts" type="number" value="10" />
+		<br>
+		<input id="photos" class="" name="photos" type="checkbox" value="photos">Include photos
+		<br>
+		<button id="generate" type="button">Generate</button>
+	</body>
+</html>
