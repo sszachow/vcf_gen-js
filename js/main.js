@@ -38,29 +38,29 @@ function indexChar(index) {
 function name(index, first, middle, last) {
 	var indx = index.toString()
 	var indxChr = indexChar(index);
-	return "N:" + indxChr + "_" + last + "_" + indx + ";" + indxChr + "_" + first + "_" + indx + ";" + indxChr + "_" + middle + "_" + indx + ";;\n";
+	return sprintf("N:%s_%s_%s;%s_%s_%s;%s_%s_%s;;\n", indxChr, last, indx, indxChr, first, indx, indxChr, middle, indx);
 }
 
 function fullName(index, first, middle, last) {
 	var indx = index.toString()
 	var indxChr = indexChar(index);
-	return "FN:" + indxChr + "_" + first + "_" + indx + " " + indxChr + "_" + last + "_" + indx + "\n";
+	return sprintf("FN:%s_%s_%s %s_%s_%s\n", indxChr, first, indx, indxChr, last, indx);
 }
 
 function fileName(contacts) {
-	return fileNameBase + "_" + contacts.toString() + ".vcf"
+    return sprintf("%s_%d.vcf", fileNameBase, contacts);
 }
 
 function org(len) {
-	return "ORG:" + rndStrUp(len) + "\n";
+    return sprintf("ORG:%s\n", rndStrUp(len));
 }
 
 function title(len) {
-	return "TITLE:" + rndStrUp(len) + "\n";
+    return sprintf("TITLE:%s\n", rndStrUp(len));
 }
 
 function telephone(type, len) {
-	return "TEL;TYPE=" + type.toUpperCase() + ",VOICE:" + rndNum(len) + "\n";
+    return sprintf("TEL;TYPE=%s,VOICE:%s\n", type.toUpperCase(), rndNum(len));
 }
 
 function vcfAsStr(contacts, first, middle, last) {
