@@ -35,20 +35,29 @@ function indexChar(index) {
     return indexChars.charAt(index % indexChars.length);
 }
 
+function validFields() {
+    for(var i = 0; i < arguments.length; i++) {
+        if(isNaN(arguments[i]) || arguments[i] < minCntcts || arguments[i] > maxCntcts) {
+            return false;
+        }
+    }
+    return true;
+}
+
 function Names() {
     this.first = $("input[id=first]").val();
     this.middle = $("input[id=middle]").val();
     this.last = $("input[id=last]").val();
 }
 
-function name(index, names) {
-    var indx = index.toString()
+function name(index, offset, names) {
+    var indx = (index + offset).toString()
     var indxChr = indexChar(index);
     return sprintf("N:%s_%s_%s;%s_%s_%s;%s_%s_%s;;\n", indxChr, names.last, indx, indxChr, names.first, indx, indxChr, names.middle, indx);
 }
 
-function fullName(index, names) {
-    var indx = index.toString()
+function fullName(index, offset, names) {
+    var indx = (index + offset).toString()
     var indxChr = indexChar(index);
     return sprintf("FN:%s_%s_%s %s_%s_%s\n", indxChr, names.first, indx, indxChr, names.last, indx);
 }
@@ -78,7 +87,7 @@ function photo(b64Arr, put) {
     }
 }
 
-function vcfAsStr(contacts, names, photos, put) {
+function vcfAsStr(contacts, offset, names, photos, put) {
     var result = "";
     var temp = "";
     
@@ -86,8 +95,8 @@ function vcfAsStr(contacts, names, photos, put) {
         temp = 
             "BEGIN:VCARD\n" +
             "VERSION:3.0\n" +
-            name(i, names) +
-            fullName(i, names) +
+            name(i, offset, names) +
+            fullName(i, offset, names) +
             photo(photos, put) +
             org(10) +
             title(8) +
@@ -102,14 +111,14 @@ function vcfAsStr(contacts, names, photos, put) {
 
 $(document).ready(function() {
     $('button#generate').click(function() {
-        var cntctsRaw = $("input[id=contacts]").val();
-        var cntcts = parseInt(cntctsRaw);
+        var cntcts = parseInt($("input[id=contacts]").val());
+        var start = parseInt($("input[id=start]").val());
 
-        if(!isNaN(cntcts) && cntcts >= minCntcts && cntcts <= maxCntcts) {
+        if(validFields(cntcts, start)) {
             var names = new Names();
             var putPhotos = $('#photos').is(':checked');
                 
-            saveAs(new Blob([vcfAsStr(cntcts, names, photosArr, putPhotos)], {type: "text/plain;charset=utf-8"}), fileName(cntcts));
+            saveAs(new Blob([vcfAsStr(cntcts, start, names, photosArr, putPhotos)], {type: "text/plain;charset=utf-8"}), fileName(cntcts));
         } else {
             window.alert("Please provide a number in range <" + minCntcts + ", " + maxCntcts + ">.");
         }
