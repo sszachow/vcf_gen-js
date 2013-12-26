@@ -6,21 +6,21 @@ var indexChars = numbers + letters.toUpperCase();
 var fileNameBase = "vcf_gmail";
 
 function rndTxt(len, chars) {
-	var text = "";
+    var text = "";
 
-	for(var i = 0; i < len; i++) {
-		text += chars.charAt(Math.floor(Math.random() * chars.length));
-	}
+    for(var i = 0; i < len; i++) {
+        text += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
 
-	return text;
+    return text;
 }
 
 function rndStr(len) {
-	return rndTxt(len, letters);
+    return rndTxt(len, letters);
 }
 
 function rndNum(len) {
-	return rndTxt(len, numbers);
+    return rndTxt(len, numbers);
 }
 
 function capitalize(string) {
@@ -28,29 +28,29 @@ function capitalize(string) {
 }
 
 function rndStrUp(len) {
-	return capitalize(rndStr(len));
+    return capitalize(rndStr(len));
 }
 
 function indexChar(index) {
-	return indexChars.charAt(index % indexChars.length);
+    return indexChars.charAt(index % indexChars.length);
 }
 
 function Names() {
     this.first = $("input[id=first]").val();
-	this.middle = $("input[id=middle]").val();
-	this.last = $("input[id=last]").val();
+    this.middle = $("input[id=middle]").val();
+    this.last = $("input[id=last]").val();
 }
 
 function name(index, names) {
-	var indx = index.toString()
-	var indxChr = indexChar(index);
-	return sprintf("N:%s_%s_%s;%s_%s_%s;%s_%s_%s;;\n", indxChr, names.last, indx, indxChr, names.first, indx, indxChr, names.middle, indx);
+    var indx = index.toString()
+    var indxChr = indexChar(index);
+    return sprintf("N:%s_%s_%s;%s_%s_%s;%s_%s_%s;;\n", indxChr, names.last, indx, indxChr, names.first, indx, indxChr, names.middle, indx);
 }
 
 function fullName(index, names) {
-	var indx = index.toString()
-	var indxChr = indexChar(index);
-	return sprintf("FN:%s_%s_%s %s_%s_%s\n", indxChr, names.first, indx, indxChr, names.last, indx);
+    var indx = index.toString()
+    var indxChr = indexChar(index);
+    return sprintf("FN:%s_%s_%s %s_%s_%s\n", indxChr, names.first, indx, indxChr, names.last, indx);
 }
 
 function fileName(contacts) {
@@ -79,39 +79,39 @@ function photo(b64Arr, put) {
 }
 
 function vcfAsStr(contacts, names, photos, put) {
-	var result = "";
-	var temp = "";
-	
-	for(var i = 0; i < contacts; i++) {
-		temp = 
-			"BEGIN:VCARD\n" +
-			"VERSION:3.0\n" +
-			name(i, names) +
-			fullName(i, names) +
-			photo(photos, put) +
-			org(10) +
-			title(8) +
-			telephone("home", 8) +
-			telephone("work", 9) +
-			"END:VCARD\n\n";
-		result += temp;
-	}
-	
-	return result;
+    var result = "";
+    var temp = "";
+    
+    for(var i = 0; i < contacts; i++) {
+        temp = 
+            "BEGIN:VCARD\n" +
+            "VERSION:3.0\n" +
+            name(i, names) +
+            fullName(i, names) +
+            photo(photos, put) +
+            org(10) +
+            title(8) +
+            telephone("home", 8) +
+            telephone("work", 9) +
+            "END:VCARD\n\n";
+        result += temp;
+    }
+    
+    return result;
 }
 
 $(document).ready(function() {
-	$('button#generate').click(function() {
-		var cntctsRaw = $("input[id=contacts]").val();
-		var cntcts = parseInt(cntctsRaw);
+    $('button#generate').click(function() {
+        var cntctsRaw = $("input[id=contacts]").val();
+        var cntcts = parseInt(cntctsRaw);
 
-		if(!isNaN(cntcts) && cntcts >= minCntcts && cntcts <= maxCntcts) {
-			var names = new Names();
-			var putPhotos = $('#photos').is(':checked');
-				
-			saveAs(new Blob([vcfAsStr(cntcts, names, photosArr, putPhotos)], {type: "text/plain;charset=utf-8"}), fileName(cntcts));
-		} else {
-			window.alert("Please provide a number in range <" + minCntcts + ", " + maxCntcts + ">.");
-		}
-	});
+        if(!isNaN(cntcts) && cntcts >= minCntcts && cntcts <= maxCntcts) {
+            var names = new Names();
+            var putPhotos = $('#photos').is(':checked');
+                
+            saveAs(new Blob([vcfAsStr(cntcts, names, photosArr, putPhotos)], {type: "text/plain;charset=utf-8"}), fileName(cntcts));
+        } else {
+            window.alert("Please provide a number in range <" + minCntcts + ", " + maxCntcts + ">.");
+        }
+    });
 });
