@@ -81,7 +81,7 @@ function telephone(type, len) {
 function photo(b64Arr, put) {
     if(put === true) {
         var pic = b64Arr[Math.floor(Math.random() * b64Arr.length)];
-        return sprintf("PHOTO;TYPE=PNG;ENCODING=B:%s\n", pic);
+        return sprintf("PHOTO;TYPE=JPEG;ENCODING=B:%s\n", pic);
     } else {
         return "";
     }
