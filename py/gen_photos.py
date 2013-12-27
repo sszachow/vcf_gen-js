@@ -33,5 +33,3 @@ for i in range(0, images):
         f.write("\n];\n")
 
 f.close()
-    
-    
