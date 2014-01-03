@@ -5,5 +5,5 @@ TODO:
 * add license
 * add slider for percentage of pictures
 * think about smarter photos implementation (iCloud fails if using embedded PNG; Gmail doesn't accept vcfs with photos as URLs; use local library for creating images)
-* add contrast generation in Color class
 * add address field generation in main.js
+* add dropdown list for different photo types (for now optional)

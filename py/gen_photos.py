@@ -19,13 +19,15 @@ def gen_js_file(images, size, type, file_path):
         c = Color()
 
         for i in range(0, images):
-            url = "http://dummyimage.com/%d/%s/%s.%s&text=%s" % (size, c.rnd_color(), c.rnd_color(), type, gen_id())
+            url = "http://dummyimage.com/%d/%s/%s.%s&text=%s" % (size, c.rnd_color(), c.contrast(), type, gen_id())
             print url
             r = requests.get(url)
             
             temp = b64encode(r.content) if r.status_code == 200 else ""
             f.write("\t\"%s\"" % temp)
-            f.write(",\n") if i < (images - 1) else f.write("\n];\n")
+            f.write(",\n") if i < (images - 1) else f.write("\n];\n\n")
+        
+        f.write("var photosType = '%s';\n" % type.upper())
 
 
 class Color(object):
@@ -46,7 +48,15 @@ class Color(object):
         self.g = random.randint(0, self.max_color)
         self.b = random.randint(0, self.max_color)
         return self.as_string()
-
+    
+    def contrast(self):
+        tmp_arr = [self.r, self.g, self.b]
+        sum = min(tmp_arr) + max(tmp_arr)
+        sum = self.max_color if sum > self.max_color else sum
+        self.r = sum - self.r
+        self.g = sum - self.g
+        self.b = sum - self.b
+        return self.as_string()
 
 if __name__ == "__main__":
     gen_js_file(images, size, type, file_path)

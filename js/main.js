@@ -3,7 +3,7 @@ var maxCntcts = 2000;
 var letters = "abcdefghijklmnopqrstuvwxyz";
 var numbers = "0123456789";
 var indexChars = numbers + letters.toUpperCase();
-var fileNameBase = "vcf_gmail";
+var fileNameBase = "vcf";
 
 function rndTxt(len, chars) {
     var text = "";
@@ -62,8 +62,13 @@ function fullName(index, offset, names) {
     return sprintf("FN:%s_%s_%s %s_%s_%s\n", indxChr, names.first, indx, indxChr, names.last, indx);
 }
 
-function fileName(contacts) {
-    return sprintf("%s_%d.vcf", fileNameBase, contacts);
+function fileName(contacts, putPhotos, type) {
+    if(putPhotos === true) {
+        var suff = sprintf("_%s", type.toLowerCase());
+    } else {
+        var suff = "";
+    }
+    return sprintf("%s_%d%s.vcf", fileNameBase, contacts, suff);
 }
 
 function org(len) {
@@ -78,16 +83,16 @@ function telephone(type, len) {
     return sprintf("TEL;TYPE=%s,VOICE:%s\n", type.toUpperCase(), rndNum(len));
 }
 
-function photo(b64Arr, put) {
+function photo(b64Arr, type, put) {
     if(put === true) {
         var pic = b64Arr[Math.floor(Math.random() * b64Arr.length)];
-        return sprintf("PHOTO;TYPE=JPEG;ENCODING=B:%s\n", pic);
+        return sprintf("PHOTO;TYPE=%s;ENCODING=B:%s\n", type, pic);
     } else {
         return "";
     }
 }
 
-function vcfAsStr(contacts, offset, names, photos, put) {
+function vcfAsStr(contacts, offset, names, photos, type, put) {
     var result = "";
     var temp = "";
     
@@ -97,7 +102,7 @@ function vcfAsStr(contacts, offset, names, photos, put) {
             "VERSION:3.0\n" +
             name(i, offset, names) +
             fullName(i, offset, names) +
-            photo(photos, put) +
+            photo(photos, type, put) +
             org(10) +
             title(8) +
             telephone("home", 8) +
@@ -117,8 +122,10 @@ $(document).ready(function() {
         if(validFields(cntcts, start)) {
             var names = new Names();
             var putPhotos = $('#photos').is(':checked');
+            var vcfStr = vcfAsStr(cntcts, start, names, photosArr, photosType, putPhotos);
+            var fName = fileName(cntcts, putPhotos, photosType);
                 
-            saveAs(new Blob([vcfAsStr(cntcts, start, names, photosArr, putPhotos)], {type: "text/plain;charset=utf-8"}), fileName(cntcts));
+            saveAs(new Blob([vcfStr], {type: "text/plain;charset=utf-8"}), fName);
         } else {
             window.alert("Please provide a number in range <" + minCntcts + ", " + maxCntcts + ">.");
         }
