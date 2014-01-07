@@ -85,8 +85,8 @@ function telephone(type, len) {
 
 function photo(b64Arr, type, put) {
     if(put === true) {
-        var pic = b64Arr[Math.floor(Math.random() * b64Arr.length)];
-        return sprintf("PHOTO;TYPE=%s;ENCODING=B:%s\n", type, pic);
+        var pic = b64Arr[type][Math.floor(Math.random() * b64Arr[type].length)];
+        return sprintf("PHOTO;TYPE=%s;ENCODING=B:%s\n", type.toUpperCase(), pic);
     } else {
         return "";
     }
@@ -115,6 +115,12 @@ function vcfAsStr(contacts, offset, names, photos, type, put) {
 }
 
 $(document).ready(function() {
+    var imgType = $("<select id=\"img_type\" name=\"img_type\" />");
+    for(var val in photos) {
+        $("<option />", {value: val, text: val}).appendTo(imgType);
+    }
+    $('span#include_text').after(imgType);
+    
     $('button#generate').click(function() {
         var cntcts = parseInt($("input[id=contacts]").val());
         var start = parseInt($("input[id=start]").val());
@@ -122,9 +128,10 @@ $(document).ready(function() {
         if(validFields(cntcts, start)) {
             var names = new Names();
             var putPhotos = $('#photos').is(':checked');
-            var vcfStr = vcfAsStr(cntcts, start, names, photosArr, photosType, putPhotos);
+            var photosType = imgType.val();
+            var vcfStr = vcfAsStr(cntcts, start, names, photos, photosType, putPhotos);
             var fName = fileName(cntcts, putPhotos, photosType);
-                
+            
             saveAs(new Blob([vcfStr], {type: "text/plain;charset=utf-8"}), fName);
         } else {
             window.alert("Please provide a number in range <" + minCntcts + ", " + maxCntcts + ">.");

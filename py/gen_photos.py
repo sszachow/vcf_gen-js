@@ -66,5 +66,5 @@ def gen_js_file(images, size, type, file_path):
         f.write("var photosType = '%s';\n" % type.upper())
 
 if __name__ == "__main__":
-    gen_js_file(images, size, type, file_path)
-    #gen_js_file2(images, size, types, file_path)
+    #gen_js_file(images, size, type, file_path)
+    gen_js_file2(images, size, types, file_path)
