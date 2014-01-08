@@ -1,8 +1,14 @@
 # JS vCard files generator
 Simple js app for creating vcf files.
 
+It uses cool libraries written by other people:
+* [FileSaver.js](https://github.com/eligrey/FileSaver.js)
+* [Blob.js](https://github.com/eligrey/Blob.js)
+* [sprintf.js](https://github.com/alexei/sprintf.js)
+* and of course [jQuery](http://jquery.com/)
+
 TODO:
-* add license
 * add slider for percentage of pictures
 * think about smarter photos implementation (iCloud fails if using embedded PNG; Gmail doesn't accept vcfs with photos as URLs; use local library for creating images)
 * add address field generation in main.js
+* host app as a github page
