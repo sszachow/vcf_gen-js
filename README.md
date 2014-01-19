@@ -4,7 +4,6 @@ Simple js app for creating vcf files.
 It uses cool libraries written by other people:
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js)
 * [Blob.js](https://github.com/eligrey/Blob.js)
-* [sprintf.js](https://github.com/alexei/sprintf.js)
 * and of course [jQuery](http://jquery.com/)
 
 TODO:

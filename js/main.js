@@ -20,6 +20,7 @@ $(document).ready(function() {
             var fName = fileName(cntcts, putPhotos, photosType);
             
             saveAs(new Blob([vcfStr], {type: "text/plain;charset=utf-8"}), fName);
+            vcfStr = null;
         } else {
             window.alert("Please provide a number in range <" + minCntcts + ", " + maxCntcts + ">.");
         }
