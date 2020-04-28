@@ -4,6 +4,7 @@ var letters = "abcdefghijklmnopqrstuvwxyz";
 var numbers = "0123456789";
 var indexChars = numbers + letters.toUpperCase();
 var fileNameBase = "vcf";
+var maxIndexDigits = 4;
 
 $(document).ready(function() {
     var $imgType = setDropDown('img_type', 'img_type', 'span#include_text', photos);

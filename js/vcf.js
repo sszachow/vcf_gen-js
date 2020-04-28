@@ -37,14 +37,19 @@ function validFields() {
     return true;
 }
 
+function pad(num) {
+    var s = "000000000" + num;
+    return s.substr(s.length - maxIndexDigits);
+}
+
 function name(index, offset, names) {
-    var indx = (index + offset).toString()
+    var indx = pad(index + offset);
     var indxChr = indexChar(index);
     return "N:" + indx + "_" + names.last + "_" + indxChr + ";" + indx + "_" + names.first + "_" + indxChr + ";" + indx + "_" + names.middle + "_" + indxChr + ";;\n";
 }
 
 function fullName(index, offset, names) {
-    var indx = (index + offset).toString()
+    var indx = pad(index + offset);
     var indxChr = indexChar(index);
     return "FN:" + indx + "_" + names.first + "_" + indxChr + " " + indx + "_" + names.last + "_" + indxChr + "\n";
 }
