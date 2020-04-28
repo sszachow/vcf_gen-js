@@ -84,15 +84,19 @@ function photo(b64Arr, type, put) {
     }
 }
 
-function address(type) {
-    return "ADR;TYPE=" + type.toUpperCase() + ":;;" + rndNum(3) + " " + rndStrUp(6) + " " + rndStrUp(4) + ";" + rndStrUp(8) + ";" + rndStrUp(5) + ";" + rndNum(5) + ";" + rndStrUp(9) + "\n";
+function address(type, put) {
+    if(put === true) {
+        return "ADR;TYPE=" + type.toUpperCase() + ":;;" + rndNum(3) + " " + rndStrUp(6) + " " + rndStrUp(4) + ";" + rndStrUp(8) + ";" + rndStrUp(5) + ";" + rndNum(5) + ";" + rndStrUp(9) + "\n";
+    } else {
+        return "";
+    }
 }
 
 function email(type) {
     return "EMAIL;TYPE=" + type.toUpperCase() + ",INTERNET:" + rndStr(5) + "." + rndStr(8) + "@" + rndStr(5) + "." + rndStr(2) + "\n";
 }
 
-function vcfAsStr(contacts, offset, names, photos, type, put) {
+function vcfAsStr(contacts, offset, names, photos, type, put, addressTypes) {
     var result = "";
     var temp = "";
     
@@ -107,8 +111,9 @@ function vcfAsStr(contacts, offset, names, photos, type, put) {
             title(8) +
             telephone("home", 8) +
             telephone("work", 9) +
-            address("home") +
-            address("work") +
+            address("home", addressTypes.home) +
+            address("work", addressTypes.work) +
+            address("other", addressTypes.other) +
             email("home") +
             email("work") +
             "END:VCARD\n\n";

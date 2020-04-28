@@ -18,11 +18,12 @@ $(document).ready(function() {
             var names = new Names();
             var putPhotos = $('#photos').is(':checked');
             var photosType = $imgType.val();
+            var addressTypes = new AddressTypes();
                         
             $genButton.animate({
                 disabled: true
             }, 100, function() {
-                var vcfStr = vcfAsStr(cntcts, start, names, photos, photosType, putPhotos);
+                var vcfStr = vcfAsStr(cntcts, start, names, photos, photosType, putPhotos, addressTypes);
                 var fName = fileName(cntcts, putPhotos, photosType);
 
                 var blob = new Blob([vcfStr], {type: "text/plain;charset=utf-8"});
