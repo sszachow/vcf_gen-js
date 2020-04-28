@@ -40,13 +40,13 @@ function validFields() {
 function name(index, offset, names) {
     var indx = (index + offset).toString()
     var indxChr = indexChar(index);
-    return "N:" + indxChr + "_" + names.last + "_" + indx + ";" + indxChr + "_" + names.first + "_" + indx + ";" + indxChr + "_" + names.middle + "_" + indx + ";;\n";
+    return "N:" + indx + "_" + names.last + "_" + indxChr + ";" + indx + "_" + names.first + "_" + indxChr + ";" + indx + "_" + names.middle + "_" + indxChr + ";;\n";
 }
 
 function fullName(index, offset, names) {
     var indx = (index + offset).toString()
     var indxChr = indexChar(index);
-    return "FN:" + indxChr + "_" + names.first + "_" + indx + " " + indxChr + "_" + names.last + "_" + indx + "\n";
+    return "FN:" + indx + "_" + names.first + "_" + indxChr + " " + indx + "_" + names.last + "_" + indxChr + "\n";
 }
 
 function fileName(contacts, putPhotos, type) {
