@@ -2,9 +2,8 @@
 Simple js app for creating vcf files.
 
 It uses cool libraries written by other people:
-* [FileSaver.js](https://github.com/eligrey/FileSaver.js)
-* [Blob.js](https://github.com/eligrey/Blob.js)
-* and of course [jQuery](http://jquery.com/)
+* [FileSaver.js](https://github.com/eligrey/FileSaver.js) (v2.0.2)
+* and of course [jQuery](http://jquery.com/) (v3.5.0)
 
 TODO:
 * add slider for percentage of pictures

@@ -24,7 +24,8 @@ $(document).ready(function() {
                 var vcfStr = vcfAsStr(cntcts, start, names, photos, photosType, putPhotos);
                 var fName = fileName(cntcts, putPhotos, photosType);
 
-                saveAs(new Blob([vcfStr], {type: "text/plain;charset=utf-8"}), fName);
+                var blob = new Blob([vcfStr], {type: "text/plain;charset=utf-8"});
+                saveAs(blob, fName);
                 vcfStr = null;
                 $genButton.prop('disabled', false);
             });            
