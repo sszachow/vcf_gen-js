@@ -12,19 +12,27 @@
     </head>
     <body>
         <h3>vCard gen</h3>
-        <input id="first" class="" name="first" type="text" value="First" onblur="if (this.value == '') {this.value = 'First';}" />
-        <input id="middle" class="" name="middle" type="text" value="Middle" onblur="if (this.value == '') {this.value = 'Middle';}" />
-        <input id="last" class="" name="last" type="text" value="Last" onblur="if (this.value == '') {this.value = 'Last';}" />
-        <br>
-        Contacts: <input id="contacts" class="" name="contacts" type="number" value="10" />
-        <br>
-        Start from: <input id="start" class="" name="contacts" type="number" value="1" />
-        <br>
-        Address types:
-        <div id="addressTypes"></div>
-        <br>
-        <input id="photos" class="" name="photos" type="checkbox" value="photos" /><span id="include_text">Include photos </span>
-        <br>
-        <button id="generate" type="button">Generate</button>
+        <div>
+            <input id="first" class="" name="first" type="text" value="First" onblur="if (this.value == '') {this.value = 'First';}" />
+            <input id="middle" class="" name="middle" type="text" value="Middle" onblur="if (this.value == '') {this.value = 'Middle';}" />
+            <input id="last" class="" name="last" type="text" value="Last" onblur="if (this.value == '') {this.value = 'Last';}" />
+        </div>
+        <div>
+            <span>Contacts:</span>
+            <input id="contacts" class="" name="contacts" type="number" value="10" />
+        </div>
+        <div>
+            <span>Start from:</span>
+            <input id="start" class="" name="contacts" type="number" value="1" />
+        </div>
+        <div id="addressTypes">
+            <span>Address types:</span>
+        </div>
+        <div>
+            <input id="photos" class="" name="photos" type="checkbox" value="photos" /><span id="include_text">Include photos </span>
+        </div>
+        <div>
+            <button id="generate" type="button">Generate</button>
+        </div>
     </body>
 </html>
