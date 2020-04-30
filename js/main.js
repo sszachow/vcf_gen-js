@@ -9,7 +9,7 @@ var allowedAddressTypes = ["Home", "Work", "Other"];
 $(document).ready(function() {
     var $imgType = setDropDown('img_type', 'img_type', 'span#include_text', photos);
     var $genButton = $('button#generate');
-    setAddressTypes(allowedAddressTypes, "addressTypes");
+    setAddressTypes(allowedAddressTypes);
     
     $genButton.click(function() {
         var cntcts = parseInt($("input[id=contacts]").val());
@@ -19,7 +19,7 @@ $(document).ready(function() {
             var names = new Names();
             var putPhotos = $('#photos').is(':checked');
             var photosType = $imgType.val();
-            var addressTypes = new AddressTypes();
+            var addressTypes = getSelectedAddressTypes();
                         
             $genButton.animate({
                 disabled: true

@@ -4,12 +4,6 @@ function Names() {
     this.last = $("input[id=last]").val();
 }
 
-function AddressTypes() {
-    this.home = $('#home').is(':checked');
-    this.work = $('#work').is(':checked');
-    this.other = $('#other').is(':checked');
-}
-
 function setDropDown(id, name, after, photos) {
     var dropDown = $("<select id=\"" + id + "\" name=\"" + name + "\" />");
 
@@ -21,21 +15,24 @@ function setDropDown(id, name, after, photos) {
     return dropDown;
 }
 
-function setAddressTypes(allowedTypes, id) {
+function setAddressTypes(allowedTypes) {
     var length = allowedTypes.length;
     for(var i = 0; i < length; i++) {
-        var id = allowedTypes[i].toLowerCase();
         var type = allowedTypes[i];
         if(i == 0) {
             var checked = "checked";
         } else {
             var checked = "";
         }
-        $("#addressTypes").append(`<label><input id="${id}" type="checkbox" ${checked} value=${type}>${type}</label>`);
+        $("#addressTypes").append(`<label><input type="checkbox" ${checked} value=${type}>${type}</label>`);
     }
 }
 
-function getSelectedAddressTypes(id) {
-
+function getSelectedAddressTypes() {
+    var result = [];
+    $("#addressTypes").children().children(":checked").each(function(){
+        result.push($(this).attr("value"));
+    });
+    console.log(result);
+    return result;
 }
-

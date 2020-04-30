@@ -92,6 +92,16 @@ function address(type, put) {
     }
 }
 
+function addresses(addressTypes) {
+    var result = "";
+    var length = addressTypes.length;
+    for(i = 0; i < length; i++) {
+        var type = addressTypes[i].toUpperCase();
+        result += `ADR;TYPE=${type}:;;${rndNum(3)} ${rndStrUp(6)} ${rndStrUp(4)};${rndStrUp(8)};${rndStrUp(5)};${rndNum(5)};${rndStrUp(9)}\n`;
+    }
+    return result;
+}
+
 function email(type) {
     return "EMAIL;TYPE=" + type.toUpperCase() + ",INTERNET:" + rndStr(5) + "." + rndStr(8) + "@" + rndStr(5) + "." + rndStr(2) + "\n";
 }
@@ -111,9 +121,7 @@ function vcfAsStr(contacts, offset, names, photos, type, put, addressTypes) {
             title(8) +
             telephone("home", 8) +
             telephone("work", 9) +
-            address("home", addressTypes.home) +
-            address("work", addressTypes.work) +
-            address("other", addressTypes.other) +
+            addresses(addressTypes) +
             email("home") +
             email("work") +
             "END:VCARD\n\n";
