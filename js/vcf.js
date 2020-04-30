@@ -30,7 +30,7 @@ function indexChar(index) {
 
 function validFields() {
     for(var i = 0; i < arguments.length; i++) {
-        if(isNaN(arguments[i]) || arguments[i] < minCntcts || arguments[i] > maxCntcts) {
+        if(isNaN(arguments[i]) || arguments[i] < minContacts || arguments[i] > maxContacts) {
             return false;
         }
     }
@@ -60,7 +60,7 @@ function fileName(contacts, putPhotos, type) {
     } else {
         var suff = "";
     }
-    return fileNameBase + "_" + contacts + suff + ".vcf";
+    return "vcf_" + contacts + suff + ".vcf";
 }
 
 function org(len) {

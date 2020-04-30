@@ -21,3 +21,12 @@ function setDropDown(id, name, after, photos) {
     return dropDown;
 }
 
+function setAddressTypes(allowedTypes, id) {
+    var length = allowedTypes.length;
+    for(var i = 0; i < length; i++) {
+        var id = allowedTypes[i].toLowerCase();
+        var type = allowedTypes[i];
+        $("#addressTypes").append("<input id=" + id + " type=\"checkbox\" checked=\"checked\" /><span>" + type + "</span>");
+    }
+}
+
