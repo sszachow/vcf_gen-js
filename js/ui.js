@@ -33,6 +33,5 @@ function getSelectedAddressTypes() {
     $("#addressTypes").children().children(":checked").each(function(){
         result.push($(this).attr("value"));
     });
-    console.log(result);
     return result;
 }

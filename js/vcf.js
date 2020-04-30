@@ -84,14 +84,6 @@ function photo(b64Arr, type, put) {
     }
 }
 
-function address(type, put) {
-    if(put === true) {
-        return "ADR;TYPE=" + type.toUpperCase() + ":;;" + rndNum(3) + " " + rndStrUp(6) + " " + rndStrUp(4) + ";" + rndStrUp(8) + ";" + rndStrUp(5) + ";" + rndNum(5) + ";" + rndStrUp(9) + "\n";
-    } else {
-        return "";
-    }
-}
-
 function addresses(addressTypes) {
     var result = "";
     var length = addressTypes.length;
