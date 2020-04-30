@@ -15,3 +15,23 @@ function setDropDown(id, name, after, photos) {
     return dropDown;
 }
 
+function setAddressTypes(allowedTypes) {
+    var length = allowedTypes.length;
+    for(var i = 0; i < length; i++) {
+        var type = allowedTypes[i];
+        if(i == 0) {
+            var checked = "checked";
+        } else {
+            var checked = "";
+        }
+        $("#addressTypes").append(`<label><input type="checkbox" ${checked} value=${type}>${type}</label>`);
+    }
+}
+
+function getSelectedAddressTypes() {
+    var result = [];
+    $("#addressTypes").children().children(":checked").each(function(){
+        result.push($(this).attr("value"));
+    });
+    return result;
+}

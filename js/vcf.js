@@ -30,7 +30,7 @@ function indexChar(index) {
 
 function validFields() {
     for(var i = 0; i < arguments.length; i++) {
-        if(isNaN(arguments[i]) || arguments[i] < minCntcts || arguments[i] > maxCntcts) {
+        if(isNaN(arguments[i]) || arguments[i] < minContacts || arguments[i] > maxContacts) {
             return false;
         }
     }
@@ -60,7 +60,7 @@ function fileName(contacts, putPhotos, type) {
     } else {
         var suff = "";
     }
-    return fileNameBase + "_" + contacts + suff + ".vcf";
+    return "vcf_" + contacts + suff + ".vcf";
 }
 
 function org(len) {
@@ -84,15 +84,21 @@ function photo(b64Arr, type, put) {
     }
 }
 
-function address(type) {
-    return "ADR;TYPE=" + type.toUpperCase() + ":;;" + rndNum(3) + " " + rndStrUp(6) + " " + rndStrUp(4) + ";" + rndStrUp(8) + ";" + rndStrUp(5) + ";" + rndNum(5) + ";" + rndStrUp(9) + "\n";
+function addresses(addressTypes) {
+    var result = "";
+    var length = addressTypes.length;
+    for(i = 0; i < length; i++) {
+        var type = addressTypes[i].toUpperCase();
+        result += `ADR;TYPE=${type}:;;${rndNum(3)} ${rndStrUp(6)} ${rndStrUp(4)};${rndStrUp(8)};${rndStrUp(5)};${rndNum(5)};${rndStrUp(9)}\n`;
+    }
+    return result;
 }
 
 function email(type) {
     return "EMAIL;TYPE=" + type.toUpperCase() + ",INTERNET:" + rndStr(5) + "." + rndStr(8) + "@" + rndStr(5) + "." + rndStr(2) + "\n";
 }
 
-function vcfAsStr(contacts, offset, names, photos, type, put) {
+function vcfAsStr(contacts, offset, names, photos, type, put, addressTypes) {
     var result = "";
     var temp = "";
     
@@ -107,8 +113,7 @@ function vcfAsStr(contacts, offset, names, photos, type, put) {
             title(8) +
             telephone("home", 8) +
             telephone("work", 9) +
-            address("home") +
-            address("work") +
+            addresses(addressTypes) +
             email("home") +
             email("work") +
             "END:VCARD\n\n";
