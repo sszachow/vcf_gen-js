@@ -26,7 +26,16 @@ function setAddressTypes(allowedTypes, id) {
     for(var i = 0; i < length; i++) {
         var id = allowedTypes[i].toLowerCase();
         var type = allowedTypes[i];
-        $("#addressTypes").append("<input id=" + id + " type=\"checkbox\" checked=\"checked\" /><span>" + type + "</span>");
+        if(i == 0) {
+            var checked = "checked";
+        } else {
+            var checked = "";
+        }
+        $("#addressTypes").append(`<label><input id="${id}" type="checkbox" ${checked} value=${type}>${type}</label>`);
     }
+}
+
+function getSelectedAddressTypes(id) {
+
 }
 
