@@ -29,7 +29,7 @@ def get_addresses_from_csvs(dir):
 
 def save_addresses_as_js(addresses):
     with open(get_target_path(), "w", encoding='utf-8') as js_file:
-        print("var addresses = ", file=js_file)
+        print("var realAddresses =", file=js_file)
         print(dumps(addresses, ensure_ascii=False) + ';', file=js_file)
 
 

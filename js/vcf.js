@@ -75,21 +75,28 @@ function telephone(type, len) {
     return "TEL;TYPE=" + type.toUpperCase() + ",VOICE:" + rndNum(len) + "\n";
 }
 
-function photo(b64Arr, type, put) {
+function photo(type, put) {
     if(put === true) {
-        var pic = b64Arr[type][Math.floor(Math.random() * b64Arr[type].length)];
+        var pic = photos[type][Math.floor(Math.random() * photos[type].length)];
         return "PHOTO;TYPE=" + type.toUpperCase() + ";ENCODING=B:" + pic + "\n";
     } else {
         return "";
     }
 }
 
-function addresses(addressTypes) {
+function addresses(addressTypes, generateAddressType) {
     var result = "";
     var length = addressTypes.length;
     for(i = 0; i < length; i++) {
         var type = addressTypes[i].toUpperCase();
-        result += `ADR;TYPE=${type}:;;${rndNum(3)} ${rndStrUp(6)} ${rndStrUp(4)};${rndStrUp(8)};${rndStrUp(5)};${rndNum(5)};${rndStrUp(9)}\n`;
+        if(generateAddressType === "random string") {
+            result += `ADR;TYPE=${type}:;;${rndNum(3)} ${rndStrUp(6)} ${rndStrUp(4)};${rndStrUp(8)};${rndStrUp(5)};${rndNum(5)};${rndStrUp(9)}\n`;
+        } else if(generateAddressType === "real addresses") {
+            var address = realAddresses[Math.floor(Math.random() * realAddresses.length)];
+            result += `ADR;TYPE=${type}:;;${address["STREET"]} ${address["HOUSENUMBER"]};${address["CITY"]};;${address["POSTCODE"]};${address["COUNTRY"]}\n`;
+        } else {
+            result += "";
+        }
     }
     return result;
 }
@@ -98,7 +105,7 @@ function email(type) {
     return "EMAIL;TYPE=" + type.toUpperCase() + ",INTERNET:" + rndStr(5) + "." + rndStr(8) + "@" + rndStr(5) + "." + rndStr(2) + "\n";
 }
 
-function vcfAsStr(contacts, offset, names, photos, type, put, addressTypes) {
+function vcfAsStr(contacts, offset, names, type, put, addressTypes, generateAddressType) {
     var result = "";
     var temp = "";
     
@@ -108,12 +115,12 @@ function vcfAsStr(contacts, offset, names, photos, type, put, addressTypes) {
             "VERSION:3.0\n" +
             name(i, offset, names) +
             fullName(i, offset, names) +
-            photo(photos, type, put) +
+            photo(type, put) +
             org(10) +
             title(8) +
             telephone("home", 8) +
             telephone("work", 9) +
-            addresses(addressTypes) +
+            addresses(addressTypes, generateAddressType) +
             email("home") +
             email("work") +
             "END:VCARD\n\n";

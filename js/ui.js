@@ -4,15 +4,10 @@ function Names() {
     this.last = $("input[id=last]").val();
 }
 
-function setDropDown(id, name, after, photos) {
-    var dropDown = $("<select id=\"" + id + "\" name=\"" + name + "\" />");
-
-    for(var val in photos) {
-        $("<option />", {value: val, text: val}).appendTo(dropDown);
+function setDropDown(id, options) {
+    for(var val in options) {
+        $(id).append(new Option(val, val));
     }
-    $(after).after(dropDown);
-    
-    return dropDown;
 }
 
 function setAddressTypes(allowedTypes) {
