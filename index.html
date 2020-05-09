@@ -6,6 +6,7 @@
         <script type="text/javascript" src="js/libs/jquery-3.5.0.min.js"></script>
         <script type="text/javascript" src="js/libs/FileSaver.min.js"></script>
         <script type="text/javascript" src="js/photos.js"></script>
+        <script type="text/javascript" src="js/addresses.js"></script>
         <script type="text/javascript" src="js/vcf.js"></script>
         <script type="text/javascript" src="js/ui.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
@@ -28,8 +29,13 @@
         <div id="addressTypes">
             <span>Address types:</span>
         </div>
-        <div>
-            <input id="photos" class="" name="photos" type="checkbox" value="photos" /><span id="include_text">Include photos </span>
+        <div id="generateAddress">
+            <label for="generateAddressTypes">Generate addresses by using:</label>
+            <select id="generateAddressTypes"></select>
+        </div>
+        <div id="photos">
+            <label><input id="includePhotos" type="checkbox" value="photos" />Include photos</label>
+            <select id="photoTypes"></select>
         </div>
         <div>
             <button id="generate" type="button">Generate</button>
